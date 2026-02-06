@@ -1,0 +1,21 @@
+:root{
+  --kamjai-indigo:#1B2A6B;
+  --kamjai-saffron:#FF8A00;
+  --kamjai-gold:#F7C948;
+  --bg:#FFF7EE;
+  --surface:#FFFFFF;
+  --text:#12142A;
+  --text-muted:#4A4F7A;
+  --radius-md:14px;
+  --radius-lg:20px;
+}
+[data-theme="retroDarkNeon"]{
+  --bg:#0B0614;
+  --surface:#140B2A;
+  --text:#F6F3FF;
+  --text-muted:#B8A8FF;
+  --neon-pink:#FF3D9A;
+  --neon-cyan:#00E5FF;
+  --neon-lime:#B6FF4D;
+  --neon-purple:#9B5CFF;
+}

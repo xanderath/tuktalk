@@ -1,5 +1,5 @@
 -- ============================================
--- TukTalk Database Schema (v2 - with fixes)
+-- KamJai Database Schema (v2 - with fixes)
 -- ============================================
 
 -- Enable UUID extension in the extensions schema and make it available
@@ -123,6 +123,7 @@ CREATE TABLE public.user_vocabulary_progress (
     srs_box INTEGER DEFAULT 1 CHECK (srs_box BETWEEN 1 AND 5),
     times_correct INTEGER DEFAULT 0 CHECK (times_correct >= 0),
     times_incorrect INTEGER DEFAULT 0 CHECK (times_incorrect >= 0),
+    incorrect_streak INTEGER DEFAULT 0 CHECK (incorrect_streak >= 0),
     last_reviewed TIMESTAMPTZ,
     next_review_date TIMESTAMPTZ,
     is_problem_word BOOLEAN DEFAULT FALSE,
@@ -217,6 +218,17 @@ CREATE TABLE public.user_achievements (
 CREATE INDEX idx_user_achievements_user_id ON public.user_achievements(user_id);
 CREATE INDEX idx_user_achievements_achievement_id ON public.user_achievements(achievement_id);
 
+-- Review sessions (for streaks/goals)
+CREATE TABLE public.review_sessions (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES public.profiles(id) ON DELETE CASCADE,
+    reviewed_count INTEGER DEFAULT 0 CHECK (reviewed_count >= 0),
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE INDEX idx_review_sessions_user_id ON public.review_sessions(user_id);
+CREATE INDEX idx_review_sessions_created_at ON public.review_sessions(created_at);
+
 CREATE TABLE public.leaderboard (
     user_id UUID PRIMARY KEY REFERENCES public.profiles(id) ON DELETE CASCADE,
     display_name TEXT,
@@ -239,6 +251,7 @@ ALTER TABLE public.subscriptions ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.user_vocabulary_progress ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.user_level_progress ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.user_achievements ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.review_sessions ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.referrals ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.influencers ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.vocabulary ENABLE ROW LEVEL SECURITY;
@@ -281,6 +294,12 @@ CREATE POLICY "Users can insert own achievements" ON public.user_achievements
     FOR INSERT WITH CHECK (auth.uid() = user_id);
 CREATE POLICY "Users can update own achievements" ON public.user_achievements
     FOR UPDATE USING (auth.uid() = user_id);
+
+-- Review sessions policies
+CREATE POLICY "Users can view own review sessions" ON public.review_sessions
+    FOR SELECT USING (auth.uid() = user_id);
+CREATE POLICY "Users can insert own review sessions" ON public.review_sessions
+    FOR INSERT WITH CHECK (auth.uid() = user_id);
 
 -- Referrals policies
 CREATE POLICY "Users can view own referral" ON public.referrals
@@ -404,4 +423,3 @@ INSERT INTO public.achievements (name, description, category, requirement_value)
 ('Survival Speaker', 'Complete Stage 1', 'level', 5),
 ('Social Butterfly', 'Complete Stage 2', 'level', 10),
 ('Share the Love', 'Share an achievement on social media', 'social', 1);
-

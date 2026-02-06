@@ -1,0 +1,105 @@
+{
+  "brand": {
+    "name": "KamJai",
+    "tagline_suggestions": [
+      "Learn Thai and English with heart.",
+      "Play your way to real Thai.",
+      "Heart words. Real talk."
+    ],
+    "colors": {
+      "light": {
+        "bg": "#FFF7EE",
+        "surface": "#FFFFFF",
+        "text_primary": "#12142A",
+        "text_secondary": "#4A4F7A",
+        "indigo_structure": "#1B2A6B",
+        "saffron_hero": "#FF8A00",
+        "gold_accent": "#F7C948",
+        "success": "#22C55E",
+        "warning": "#F59E0B",
+        "danger": "#EF4444"
+      },
+      "dark_neon": {
+        "bg": "#0B0614",
+        "surface": "#140B2A",
+        "text_primary": "#F6F3FF",
+        "text_secondary": "#B8A8FF",
+        "indigo_structure": "#3B2A8F",
+        "saffron_hero": "#FF8A00",
+        "gold_accent": "#F7C948",
+        "neon_pink": "#FF3D9A",
+        "neon_cyan": "#00E5FF",
+        "neon_purple": "#9B5CFF",
+        "neon_lime": "#B6FF4D"
+      }
+    },
+    "radius": {
+      "sm": 8,
+      "md": 14,
+      "lg": 20,
+      "xl": 28
+    },
+    "spacing": {
+      "4": 4,
+      "8": 8,
+      "12": 12,
+      "16": 16,
+      "20": 20,
+      "24": 24,
+      "32": 32
+    },
+    "type": {
+      "latin": {
+        "recommended": [
+          "Manrope",
+          "Inter",
+          "Plus Jakarta Sans"
+        ],
+        "fallback": "system-ui"
+      },
+      "thai": {
+        "recommended": [
+          "Noto Sans Thai",
+          "IBM Plex Sans Thai",
+          "Prompt (neutral weights)"
+        ],
+        "fallback": "sans-serif"
+      },
+      "pixel": {
+        "recommended": [
+          "Press Start 2P (Latin)",
+          "Pixelify Sans (Latin)",
+          "Upheaval/VT323 (display)"
+        ],
+        "thai_note": "For Thai pixel text, use custom bitmap glyphs or a Thai-capable pixel font; otherwise keep Thai in a clean Thai sans and pixelize only UI chrome."
+      }
+    }
+  },
+  "components": {
+    "button": {
+      "height": {
+        "sm": 40,
+        "md": 48,
+        "lg": 56
+      },
+      "border": {
+        "light": 0,
+        "retro": 2
+      },
+      "glow": {
+        "dark_neon": true
+      }
+    },
+    "nav": {
+      "tab_height": 64,
+      "icon_size": 24
+    },
+    "card": {
+      "padding": 16,
+      "shadow": {
+        "light": "soft",
+        "dark_neon": "glow"
+      }
+    }
+  }
+}

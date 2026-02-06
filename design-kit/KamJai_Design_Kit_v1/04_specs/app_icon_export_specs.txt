@@ -1,0 +1,26 @@
+KamJai App Icon Export Specs
+===========================
+
+You can keep ONE master icon (vector) and export per platform.
+
+iOS (App Store + device)
+- 1024x1024 (App Store)
+- 180x180 (iPhone @3x)
+- 167x167 (iPad Pro @2x)
+- 152x152 (iPad @2x)
+- 120x120 (iPhone @2x)
+(Plus any additional sizes your build pipeline requests.)
+
+Android (Adaptive icon)
+- Foreground layer: 432x432
+- Background layer: 432x432
+- Legacy icon: 512x512 (Play Store)
+
+Web / PWA
+- favicon.ico (16/32/48)
+- 192x192, 512x512 (PWA manifest)
+- 180x180 (Apple touch icon)
+
+Export Guidance
+- Keep a SAFE ZONE: no critical detail in the outer 12% of the icon.
+- In retro mode, ensure the heart/letters remain legible at 48px and 24px.
